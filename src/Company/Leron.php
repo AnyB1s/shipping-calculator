@@ -34,7 +34,7 @@ class Leron implements Company
 
     public function volume(Package $package)
     {
-        // TODO: Implement volume() method.
+        return 0;
     }
 
     private function basePrice(Address $address)

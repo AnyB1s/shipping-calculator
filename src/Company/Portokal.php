@@ -31,10 +31,6 @@ class Portokal implements Company
         $baseAmount = new Money(500, $gbp);
         $weight = $package->weight()->quantity();
 
-//        if ( $packge->type()->is( PackageType::PERSONAL ) ) {
-//            throw new \Exception('wtf dude');
-//        }
-
         if ($weight > 5) {
             for ($i = 5; $i < $weight; ++$i) {
                 $multiplier = ($i <= 100 ? 80 : 70);
@@ -43,13 +39,11 @@ class Portokal implements Company
             }
         }
 
-        $this->price = $baseAmount;
-
         return $baseAmount;
     }
 
     public function volume(Package $package)
     {
-        // TODO: Implement volume() method.
+        return 0;
     }
 }

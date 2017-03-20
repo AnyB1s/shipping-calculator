@@ -35,7 +35,7 @@ class DostavkaAnglia implements Company
 
     public function volume(Package $package): mixed
     {
-        // TODO: Implement volume() method.
+        return 0;
     }
 
     /**

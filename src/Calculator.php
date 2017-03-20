@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 class Calculator
 {
     /**
-     * @var array
+     * @var Collection
      */
     private $companies;
     /**
@@ -18,7 +18,7 @@ class Calculator
     /**
      * Calculator constructor.
      * @param Package $package
-     * @param array $companies
+     * @param Collection $companies
      */
     public function __construct(Package $package, Collection $companies)
     {

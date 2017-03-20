@@ -45,6 +45,6 @@ class KraychevTransport implements Company
 
     public function volume(Package $package)
     {
-        // TODO: Implement volume() method.
+        return 0;
     }
 }

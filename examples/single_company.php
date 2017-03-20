@@ -13,6 +13,7 @@ $package = new \AnyB1s\ShippingCalculator\Package($from, $to, $dimensions, new \
 $companies = collect([
     new \AnyB1s\ShippingCalculator\Company\Bulkris(),
     new \AnyB1s\ShippingCalculator\Company\DostavkaAnglia(),
+    new \AnyB1s\ShippingCalculator\Company\DostavkaGermania(),
     new \AnyB1s\ShippingCalculator\Company\KraychevTransport(),
     new \AnyB1s\ShippingCalculator\Company\Leron(),
     new \AnyB1s\ShippingCalculator\Company\Portokal(),
