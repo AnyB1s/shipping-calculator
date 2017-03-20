@@ -55,5 +55,4 @@ class DostavkaGermania implements Company
     {
         return 0;
     }
-
 }

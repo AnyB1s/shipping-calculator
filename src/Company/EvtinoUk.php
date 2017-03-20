@@ -59,5 +59,4 @@ class EvtinoUk implements Company
     {
         return 0;
     }
-
 }
