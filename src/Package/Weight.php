@@ -45,6 +45,4 @@ class Weight implements \JsonSerializable
             'unit' => $this->unit
         ];
     }
-
-
 }

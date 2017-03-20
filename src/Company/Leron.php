@@ -40,9 +40,12 @@ class Leron implements Company
     private function basePrice(Address $address)
     {
         switch ($address->country()->getIsoAlpha2()) {
-            case 'GB': return 200;
-            case 'DE': return 300;
-            case 'ES': return 550;
+            case 'GB':
+                return 200;
+            case 'DE':
+                return 300;
+            case 'ES':
+                return 550;
         }
     }
 }

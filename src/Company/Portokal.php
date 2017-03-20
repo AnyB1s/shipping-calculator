@@ -52,5 +52,4 @@ class Portokal implements Company
     {
         // TODO: Implement volume() method.
     }
-
 }

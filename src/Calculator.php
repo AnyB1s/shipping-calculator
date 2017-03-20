@@ -32,11 +32,11 @@ class Calculator
     public function result()
     {
         return $this->companies
-            ->filter(function(Company $company) {
+            ->filter(function (Company $company) {
                 $package = $this->package;
 
                 return $company->canShipTo($package->recipientAddress())&& $company->canShipFrom($package->senderAddress());
-            })->map(function(Company $company) {
+            })->map(function (Company $company) {
                 return $company->priceFor($this->package);
             });
     }

@@ -54,5 +54,4 @@ class DostavkaAnglia implements Company
 
         return 150;
     }
-
 }
