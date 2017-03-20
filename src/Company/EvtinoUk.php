@@ -5,6 +5,7 @@ namespace AnyB1s\ShippingCalculator\Company;
 use AnyB1s\ShippingCalculator\Address;
 use AnyB1s\ShippingCalculator\Company;
 use AnyB1s\ShippingCalculator\Package;
+use AnyB1s\ShippingCalculator\PricingCollection;
 use Money\Currency;
 use Money\Money;
 
@@ -37,7 +38,7 @@ class EvtinoUk implements Company
     /**
      * @inheritDoc
      */
-    public function priceFor(Package $package) : Money
+    public function priceFor(Package $package) : PricingCollection
     {
         $gbp = new Currency('GBP');
         $baseAmount = new Money(100, $gbp);
@@ -49,7 +50,7 @@ class EvtinoUk implements Company
             }
         }
 
-        return $baseAmount;
+        return new PricingCollection([ $baseAmount ]);
     }
 
     /**

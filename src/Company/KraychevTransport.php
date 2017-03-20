@@ -5,6 +5,7 @@ namespace AnyB1s\ShippingCalculator\Company;
 use AnyB1s\ShippingCalculator\Address;
 use AnyB1s\ShippingCalculator\Company;
 use AnyB1s\ShippingCalculator\Package;
+use AnyB1s\ShippingCalculator\PricingCollection;
 use Money\Currency;
 use Money\Money;
 
@@ -25,7 +26,7 @@ class KraychevTransport implements Company
         return in_array($address->country()->getIsoAlpha2(), ['BG', 'DE', 'AT']);
     }
 
-    public function priceFor(Package $package): Money
+    public function priceFor(Package $package): PricingCollection
     {
         $lev = new Currency('BGN');
         $amount = new Money(0, $lev);
@@ -40,7 +41,7 @@ class KraychevTransport implements Company
             $amount = $amount->add(new Money(300, $lev));
         }
 
-        return $amount;
+        return new PricingCollection([ $amount ]);
     }
 
     public function volume(Package $package)

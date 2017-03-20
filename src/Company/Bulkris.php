@@ -5,6 +5,7 @@ namespace AnyB1s\ShippingCalculator\Company;
 use AnyB1s\ShippingCalculator\Address;
 use AnyB1s\ShippingCalculator\Company;
 use AnyB1s\ShippingCalculator\Package;
+use AnyB1s\ShippingCalculator\PricingCollection;
 use Money\Currency;
 use Money\Money;
 
@@ -35,7 +36,7 @@ class Bulkris implements Company
         return in_array($address->country()->getIsoAlpha2(), ['DE', 'BG']);
     }
 
-    public function priceFor(Package $package) : Money
+    public function priceFor(Package $package) : PricingCollection
     {
         $weight = $package->weight()->quantity();
         switch ($weight) {
@@ -56,7 +57,9 @@ class Bulkris implements Company
 
         $amount = 200 * $package->dimensions()->width() + $base;
 
-        return new Money($amount, new Currency('EUR'));
+        return new PricingCollection([
+            new Money($amount, new Currency('EUR'))
+        ]);
     }
 
     public function volume(Package $package)

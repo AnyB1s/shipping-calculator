@@ -5,6 +5,7 @@ namespace AnyB1s\ShippingCalculator\Company;
 use AnyB1s\ShippingCalculator\Address;
 use AnyB1s\ShippingCalculator\Company;
 use AnyB1s\ShippingCalculator\Package;
+use AnyB1s\ShippingCalculator\PricingCollection;
 use Money\Currency;
 use Money\Money;
 
@@ -25,7 +26,7 @@ class Portokal implements Company
         return 'GB' === $address->country()->getIsoAlpha2();
     }
 
-    public function priceFor(Package $package): Money
+    public function priceFor(Package $package): PricingCollection
     {
         $gbp = new Currency('GBP');
         $baseAmount = new Money(500, $gbp);
@@ -39,7 +40,7 @@ class Portokal implements Company
             }
         }
 
-        return $baseAmount;
+        return new PricingCollection([ $baseAmount ]);
     }
 
     public function volume(Package $package)

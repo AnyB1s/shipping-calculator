@@ -21,6 +21,6 @@ $companies = collect([
 
 $calculator = new \AnyB1s\ShippingCalculator\Calculator($package, $companies);
 
-$calculator->result()->each(function(Money $price) {
-    print_r($price);
+$calculator->result()->each(function(\AnyB1s\ShippingCalculator\PricingCollection $pricingCollection) {
+    print_r($pricingCollection);
 });

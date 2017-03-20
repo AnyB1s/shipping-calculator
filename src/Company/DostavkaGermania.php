@@ -5,6 +5,7 @@ namespace AnyB1s\ShippingCalculator\Company;
 use AnyB1s\ShippingCalculator\Address;
 use AnyB1s\ShippingCalculator\Company;
 use AnyB1s\ShippingCalculator\Package;
+use AnyB1s\ShippingCalculator\PricingCollection;
 use Money\Currency;
 use Money\Money;
 
@@ -41,11 +42,13 @@ class DostavkaGermania implements Company
     /**
      * @inheritDoc
      */
-    public function priceFor(Package $package) : Money
+    public function priceFor(Package $package) : PricingCollection
     {
         $amount = 250 * $package->weight()->quantity();
 
-        return new Money($amount, new Currency('BGN'));
+        return new PricingCollection([
+            new Money($amount, new Currency('BGN'))
+        ]);
     }
 
     /**
