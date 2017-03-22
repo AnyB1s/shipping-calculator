@@ -6,6 +6,8 @@ use AnyB1s\ShippingCalculator\Address;
 use AnyB1s\ShippingCalculator\Company;
 use AnyB1s\ShippingCalculator\Package;
 use AnyB1s\ShippingCalculator\PricingCollection;
+use AnyB1s\ShippingCalculator\Tariff;
+use AnyB1s\ShippingCalculator\TariffType;
 use Money\Currency;
 use Money\Money;
 
@@ -58,7 +60,7 @@ class Bulkris implements Company
         $amount = 200 * $package->dimensions()->width() + $base;
 
         return new PricingCollection([
-            new Money($amount, new Currency('EUR'))
+            new Tariff(new Money($amount, new Currency('EUR')), new TariffType(TariffType::OFFICE_TO_OFFICE))
         ]);
     }
 

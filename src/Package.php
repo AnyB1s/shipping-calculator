@@ -55,4 +55,14 @@ class Package
     {
         return $this->weight;
     }
+
+    public function goingTo(string $country)
+    {
+        return $country === $this->recipientAddress()->country()->getIsoAlpha2();
+    }
+
+    public function goingFrom(string $country)
+    {
+        return $country === $this->senderAddress()->country()->getIsoAlpha2();
+    }
 }

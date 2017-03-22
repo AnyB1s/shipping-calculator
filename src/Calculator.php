@@ -29,7 +29,7 @@ class Calculator
     /**
      * @return Collection
      */
-    public function result()
+    public function compare()
     {
         return $this->companies
             ->filter(function (Company $company) {
@@ -37,7 +37,7 @@ class Calculator
 
                 return $company->canShipTo($package->recipientAddress())&& $company->canShipFrom($package->senderAddress());
             })->map(function (Company $company) {
-                return $company->priceFor($this->package);
+                return new Result($company, $company->priceFor($this->package));
             });
     }
 }

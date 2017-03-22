@@ -6,6 +6,8 @@ use AnyB1s\ShippingCalculator\Address;
 use AnyB1s\ShippingCalculator\Company;
 use AnyB1s\ShippingCalculator\Package;
 use AnyB1s\ShippingCalculator\PricingCollection;
+use AnyB1s\ShippingCalculator\Tariff;
+use AnyB1s\ShippingCalculator\TariffType;
 use Money\Currency;
 use Money\Money;
 
@@ -31,7 +33,7 @@ class Leron implements Company
         $amount = $this->basePrice($package->senderAddress()) * $package->weight()->quantity();
 
         return new PricingCollection([
-            new Money($amount, new Currency('BGN'))
+            new Tariff(new Money($amount, new Currency('BGN')), new TariffType(TariffType::OFFICE_TO_OFFICE))
         ]);
     }
 

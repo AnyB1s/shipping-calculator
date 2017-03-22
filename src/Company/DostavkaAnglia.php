@@ -7,6 +7,8 @@ use AnyB1s\ShippingCalculator\Company;
 use AnyB1s\ShippingCalculator\Package;
 use AnyB1s\ShippingCalculator\Package\Weight;
 use AnyB1s\ShippingCalculator\PricingCollection;
+use AnyB1s\ShippingCalculator\Tariff;
+use AnyB1s\ShippingCalculator\TariffType;
 use Money\Currency;
 use Money\Money;
 
@@ -31,9 +33,9 @@ class DostavkaAnglia implements Company
     {
         $amount = $this->multiplierFor($package->weight()) * $package->weight()->quantity();
 
-        return new PricingCollection(
-            new Money($amount, new Currency('BGN'))
-        );
+        return new PricingCollection([
+            new Tariff(new Money($amount, new Currency('BGN')), new TariffType(TariffType::OFFICE_TO_OFFICE))
+        ]);
     }
 
     public function volume(Package $package): mixed

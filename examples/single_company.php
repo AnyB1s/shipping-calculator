@@ -1,10 +1,12 @@
 <?php
 
+use AnyB1s\ShippingCalculator\PricingCollection;
+use AnyB1s\ShippingCalculator\Tariff;
 use Money\Money;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$from = new \AnyB1s\ShippingCalculator\Address(country('DE'));
+$from = new \AnyB1s\ShippingCalculator\Address(country('GB'));
 $to = new \AnyB1s\ShippingCalculator\Address(country('BG'));
 
 $dimensions = new \AnyB1s\ShippingCalculator\Package\Dimensions(50, 50, 50, 'kg');
@@ -14,6 +16,7 @@ $companies = collect([
     new \AnyB1s\ShippingCalculator\Company\Bulkris(),
     new \AnyB1s\ShippingCalculator\Company\DostavkaAnglia(),
     new \AnyB1s\ShippingCalculator\Company\DostavkaGermania(),
+    new \AnyB1s\ShippingCalculator\Company\EvtinoUk(),
     new \AnyB1s\ShippingCalculator\Company\KraychevTransport(),
     new \AnyB1s\ShippingCalculator\Company\Leron(),
     new \AnyB1s\ShippingCalculator\Company\Portokal(),
@@ -21,6 +24,10 @@ $companies = collect([
 
 $calculator = new \AnyB1s\ShippingCalculator\Calculator($package, $companies);
 
-$calculator->result()->each(function(\AnyB1s\ShippingCalculator\PricingCollection $pricingCollection) {
-    print_r($pricingCollection);
+$calculator->compare()->each(function(\AnyB1s\ShippingCalculator\Result $result) {
+    echo $result->company()->name() . PHP_EOL;
+    $result->prices()->each(function(Tariff $tariff) {
+        echo $tariff->price()->getAmount() . PHP_EOL;
+    });
+    echo PHP_EOL;
 });

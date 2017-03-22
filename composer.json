@@ -21,6 +21,7 @@
         "php": "~7.0",
         "illuminate/support": "^5.4",
         "moneyphp/money": "^3.0",
+        "phpextra/enum": "^1.0",
         "phpunit/phpunit": "^6.0",
         "rinvex/country": "^3.1"
     },
