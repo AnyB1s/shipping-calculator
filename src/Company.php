@@ -27,7 +27,7 @@ interface Company
      * @param Package $package
      * @return PricingCollection
      */
-    public function priceFor(Package $package) : PricingCollection;
+    public function tariff(Package $package) : PricingCollection;
 
     /**
      * @param Package $package

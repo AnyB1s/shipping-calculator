@@ -40,11 +40,19 @@ class EvtinoUk implements Company
     /**
      * @inheritDoc
      */
-    public function priceFor(Package $package) : PricingCollection
+    public function tariff(Package $package) : PricingCollection
     {
         return new PricingCollection([
-            new Tariff($this->office2office($package), new TariffType(TariffType::OFFICE_TO_OFFICE)),
-            new Tariff($this->office2address($package), new TariffType(TariffType::OFFICE_TO_ADDRESS)),
+            new Tariff(
+                $this,
+                $this->office2office($package),
+                new TariffType(TariffType::OFFICE_TO_OFFICE)
+            ),
+            new Tariff(
+                $this,
+                $this->office2address($package),
+                new TariffType(TariffType::OFFICE_TO_ADDRESS)
+            ),
         ]);
     }
 

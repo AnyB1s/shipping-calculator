@@ -7,6 +7,10 @@ use Money\Money;
 class Tariff
 {
     /**
+     * @var Company
+     */
+    private $company;
+    /**
      * @var Money
      */
     private $money;
@@ -15,10 +19,16 @@ class Tariff
      */
     private $type;
 
-    public function __construct(Money $money, TariffType $type)
+    public function __construct(Company $company, Money $money, TariffType $type)
     {
+        $this->company = $company;
         $this->money = $money;
         $this->type = $type;
+    }
+
+    public function company()
+    {
+        return $this->company;
     }
 
     public function price()

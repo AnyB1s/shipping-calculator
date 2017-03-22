@@ -24,10 +24,9 @@ $companies = collect([
 
 $calculator = new \AnyB1s\ShippingCalculator\Calculator($package, $companies);
 
-$calculator->compare()->each(function(\AnyB1s\ShippingCalculator\Result $result) {
-    echo $result->company()->name() . PHP_EOL;
-    $result->prices()->each(function(Tariff $tariff) {
-        echo $tariff->price()->getAmount() . PHP_EOL;
+$calculator->compare()->each(function(PricingCollection $pricingCollection) {
+    $pricingCollection->each(function(Tariff $tariff) {
+        echo $tariff->company()->name() . PHP_EOL;
+        echo $tariff->price()->absolute()->getAmount() . PHP_EOL;
     });
-    echo PHP_EOL;
 });

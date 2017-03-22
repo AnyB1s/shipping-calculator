@@ -28,12 +28,16 @@ class Leron implements Company
         return in_array($address->country()->getIsoAlpha2(), ['GB', 'DE', 'ES']);
     }
 
-    public function priceFor(Package $package): PricingCollection
+    public function tariff(Package $package): PricingCollection
     {
         $amount = $this->basePrice($package->senderAddress()) * $package->weight()->quantity();
 
         return new PricingCollection([
-            new Tariff(new Money($amount, new Currency('BGN')), new TariffType(TariffType::OFFICE_TO_OFFICE))
+            new Tariff(
+                $this,
+                new Money($amount, new Currency('BGN')),
+                new TariffType(TariffType::OFFICE_TO_OFFICE)
+            )
         ]);
     }
 

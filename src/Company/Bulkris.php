@@ -38,7 +38,7 @@ class Bulkris implements Company
         return in_array($address->country()->getIsoAlpha2(), ['DE', 'BG']);
     }
 
-    public function priceFor(Package $package) : PricingCollection
+    public function tariff(Package $package) : PricingCollection
     {
         $weight = $package->weight()->quantity();
         switch ($weight) {
@@ -60,7 +60,11 @@ class Bulkris implements Company
         $amount = 200 * $package->dimensions()->width() + $base;
 
         return new PricingCollection([
-            new Tariff(new Money($amount, new Currency('EUR')), new TariffType(TariffType::OFFICE_TO_OFFICE))
+            new Tariff(
+                $this,
+                new Money($amount, new Currency('EUR')),
+                new TariffType(TariffType::OFFICE_TO_OFFICE)
+            )
         ]);
     }
 

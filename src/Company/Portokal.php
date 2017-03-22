@@ -28,7 +28,7 @@ class Portokal implements Company
         return 'GB' === $address->country()->getIsoAlpha2();
     }
 
-    public function priceFor(Package $package): PricingCollection
+    public function tariff(Package $package): PricingCollection
     {
         $gbp = new Currency('GBP');
         $baseAmount = new Money(500, $gbp);
@@ -42,7 +42,13 @@ class Portokal implements Company
             }
         }
 
-        return new PricingCollection([ new Tariff($baseAmount, new TariffType(TariffType::OFFICE_TO_OFFICE)) ]);
+        return new PricingCollection([
+            new Tariff(
+                $this,
+                $baseAmount,
+                new TariffType(TariffType::OFFICE_TO_OFFICE)
+            )
+        ]);
     }
 
     public function volume(Package $package)

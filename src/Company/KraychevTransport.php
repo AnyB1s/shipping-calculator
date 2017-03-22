@@ -6,6 +6,7 @@ use AnyB1s\ShippingCalculator\Address;
 use AnyB1s\ShippingCalculator\Company;
 use AnyB1s\ShippingCalculator\Package;
 use AnyB1s\ShippingCalculator\PricingCollection;
+use AnyB1s\ShippingCalculator\Tariff;
 use AnyB1s\ShippingCalculator\TariffType;
 use Money\Currency;
 use Money\Money;
@@ -27,7 +28,7 @@ class KraychevTransport implements Company
         return in_array($address->country()->getIsoAlpha2(), ['BG', 'DE', 'AT']);
     }
 
-    public function priceFor(Package $package): PricingCollection
+    public function tariff(Package $package): PricingCollection
     {
         $lev = new Currency('BGN');
         $amount = new Money(0, $lev);
@@ -42,7 +43,13 @@ class KraychevTransport implements Company
             $amount = $amount->add(new Money(300, $lev));
         }
 
-        return new PricingCollection([ $amount, new TariffType(TariffType::OFFICE_TO_OFFICE) ]);
+        return new PricingCollection([
+            new Tariff(
+                $this,
+                $amount,
+                new TariffType(TariffType::OFFICE_TO_OFFICE)
+            )
+        ]);
     }
 
     public function volume(Package $package)

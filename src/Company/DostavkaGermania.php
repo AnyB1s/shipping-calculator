@@ -44,7 +44,7 @@ class DostavkaGermania implements Company
     /**
      * @inheritDoc
      */
-    public function priceFor(Package $package) : PricingCollection
+    public function tariff(Package $package) : PricingCollection
     {
         if ($package->goingTo('DE')) {
             $amount = 250 * $package->weight()->quantity();
@@ -53,7 +53,11 @@ class DostavkaGermania implements Company
         }
 
         return new PricingCollection([
-            new Tariff(new Money($amount, new Currency('BGN')), new TariffType(TariffType::OFFICE_TO_OFFICE))
+            new Tariff(
+                $this,
+                new Money($amount, new Currency('BGN')),
+                new TariffType(TariffType::OFFICE_TO_OFFICE)
+            )
         ]);
     }
 
