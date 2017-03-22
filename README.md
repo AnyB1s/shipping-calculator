@@ -74,10 +74,10 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/AnyB1s/shippin-calculator.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/AnyB1s/shippin-calculator.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/AnyB1s/shippin-calculator
-[link-travis]: https://travis-ci.org/AnyB1s/shippin-calculator
-[link-scrutinizer]: https://scrutinizer-ci.com/g/AnyB1s/shippin-calculator/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/AnyB1s/shippin-calculator
-[link-downloads]: https://packagist.org/packages/AnyB1s/shippin-calculator
-[link-author]: https://github.com/AnyB1s
+[link-packagist]: https://packagist.org/packages/anyb1s/shippin-calculator
+[link-travis]: https://travis-ci.org/anyb1s/shippin-calculator
+[link-scrutinizer]: https://scrutinizer-ci.com/g/anyb1s/shippin-calculator/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/anyb1s/shippin-calculator
+[link-downloads]: https://packagist.org/packages/anyb1s/shippin-calculator
+[link-author]: https://github.com/anyb1s
 [link-contributors]: ../../contributors
