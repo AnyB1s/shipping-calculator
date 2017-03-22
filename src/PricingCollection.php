@@ -11,7 +11,7 @@ class PricingCollection extends Collection
      */
     public function __construct($items)
     {
-        $items = array_filter($items, function($item) {
+        $items = array_filter($items, function ($item) {
             return $item instanceof Tariff;
         });
 
