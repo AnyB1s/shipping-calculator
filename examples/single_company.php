@@ -2,7 +2,6 @@
 
 use AnyB1s\ShippingCalculator\PricingCollection;
 use AnyB1s\ShippingCalculator\Tariff;
-use Money\Money;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -12,7 +11,7 @@ $to = new \AnyB1s\ShippingCalculator\Address(country('BG'));
 $dimensions = new \AnyB1s\ShippingCalculator\Package\Dimensions(50, 50, 50, 'kg');
 $package = new \AnyB1s\ShippingCalculator\Package($from, $to, $dimensions, new \AnyB1s\ShippingCalculator\Package\Weight(100, 'kg'));
 
-$companies = collect([
+$companies = new Illuminate\Support\Collection([
     new \AnyB1s\ShippingCalculator\Company\Bulkris(),
     new \AnyB1s\ShippingCalculator\Company\DostavkaAnglia(),
     new \AnyB1s\ShippingCalculator\Company\DostavkaGermania(),
