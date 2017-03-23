@@ -1,5 +1,5 @@
 {
-    "name": "AnyB1s/shipping-calculator",
+    "name": "anyb1s/shipping-calculator",
     "type": "library",
     "description": "shipping-calculator",
     "keywords": [
@@ -12,8 +12,8 @@
     "authors": [
         {
             "name": "Galin Denev",
-            "email": "wtf@wtf.com",
-            "homepage": "http://wtf.com",
+            "email": "anyb1s@abv.bg",
+            "homepage": "http://anyb1s.be",
             "role": "Developer"
         }
     ],
@@ -50,5 +50,7 @@
     },
     "config": {
         "sort-packages": true
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
