@@ -14,30 +14,8 @@ use Money\Money;
 /**
  * Class Bulkris.
  */
-class Bulkris implements Company
+class Bulkris extends Base implements Company
 {
-    /**
-     * @return string
-     */
-    public function name(): string
-    {
-        return 'Bul Kris';
-    }
-
-    /**
-     * @param Address $address
-     * @return bool
-     */
-    public function canShipTo(Address $address) : bool
-    {
-        return in_array($address->country()->getIsoAlpha2(), ['DE', 'BG']);
-    }
-
-    public function canShipFrom(Address $address) : bool
-    {
-        return in_array($address->country()->getIsoAlpha2(), ['DE', 'BG']);
-    }
-
     public function tariff(Package $package) : PricingCollection
     {
         $weight = $package->weight()->quantity();

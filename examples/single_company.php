@@ -5,7 +5,7 @@ use AnyB1s\ShippingCalculator\Tariff;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$from = new \AnyB1s\ShippingCalculator\Address(country('GB'));
+$from = new \AnyB1s\ShippingCalculator\Address(country('DE'));
 $to = new \AnyB1s\ShippingCalculator\Address(country('BG'));
 
 $dimensions = new \AnyB1s\ShippingCalculator\Package\Dimensions(50, 50, 50, 'kg');
