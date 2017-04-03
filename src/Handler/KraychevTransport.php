@@ -1,6 +1,6 @@
 <?php
 
-namespace AnyB1s\ShippingCalculator\Company;
+namespace AnyB1s\ShippingCalculator\Handler;
 
 use AnyB1s\ShippingCalculator\Address;
 use AnyB1s\ShippingCalculator\Company;
@@ -11,41 +11,42 @@ use AnyB1s\ShippingCalculator\TariffType;
 use Money\Currency;
 use Money\Money;
 
-class Portokal implements Company
+class KraychevTransport implements Company
 {
     public function name(): string
     {
-        return 'Portokal';
+        return 'Kraychev Transport';
     }
 
     public function canShipTo(Address $address): bool
     {
-        return 'BG' === $address->country()->getIsoAlpha2();
+        return in_array($address->country()->getIsoAlpha2(), ['BG', 'DE', 'AT']);
     }
 
     public function canShipFrom(Address $address): bool
     {
-        return 'GB' === $address->country()->getIsoAlpha2();
+        return in_array($address->country()->getIsoAlpha2(), ['BG', 'DE', 'AT']);
     }
 
     public function tariff(Package $package): PricingCollection
     {
-        $gbp = new Currency('GBP');
-        $baseAmount = new Money(500, $gbp);
+        $lev = new Currency('BGN');
+        $amount = new Money(0, $lev);
         $weight = $package->weight()->quantity();
 
-        if ($weight > 5) {
-            for ($i = 5; $i < $weight; ++$i) {
-                $multiplier = ($i <= 100 ? 80 : 70);
-
-                $baseAmount = $baseAmount->add(new Money($multiplier, $gbp));
+        for ($i = 1; $i <= $weight; $i++) {
+            if ($i < 15) {
+                $amount = $amount->add(new Money(400, $lev));
+                continue;
             }
+
+            $amount = $amount->add(new Money(300, $lev));
         }
 
         return new PricingCollection([
             new Tariff(
                 $this,
-                $baseAmount,
+                $amount,
                 new TariffType(TariffType::OFFICE_TO_OFFICE)
             )
         ]);

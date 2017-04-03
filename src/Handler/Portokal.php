@@ -1,6 +1,6 @@
 <?php
 
-namespace AnyB1s\ShippingCalculator\Company;
+namespace AnyB1s\ShippingCalculator\Handler;
 
 use AnyB1s\ShippingCalculator\Address;
 use AnyB1s\ShippingCalculator\Company;
@@ -11,11 +11,11 @@ use AnyB1s\ShippingCalculator\TariffType;
 use Money\Currency;
 use Money\Money;
 
-class Leron implements Company
+class Portokal implements Company
 {
     public function name(): string
     {
-        return 'Leron';
+        return 'Portokal';
     }
 
     public function canShipTo(Address $address): bool
@@ -25,17 +25,27 @@ class Leron implements Company
 
     public function canShipFrom(Address $address): bool
     {
-        return in_array($address->country()->getIsoAlpha2(), ['GB', 'DE', 'ES']);
+        return 'GB' === $address->country()->getIsoAlpha2();
     }
 
     public function tariff(Package $package): PricingCollection
     {
-        $amount = $this->basePrice($package->senderAddress()) * $package->weight()->quantity();
+        $gbp = new Currency('GBP');
+        $baseAmount = new Money(500, $gbp);
+        $weight = $package->weight()->quantity();
+
+        if ($weight > 5) {
+            for ($i = 5; $i < $weight; ++$i) {
+                $multiplier = ($i <= 100 ? 80 : 70);
+
+                $baseAmount = $baseAmount->add(new Money($multiplier, $gbp));
+            }
+        }
 
         return new PricingCollection([
             new Tariff(
                 $this,
-                new Money($amount, new Currency('BGN')),
+                $baseAmount,
                 new TariffType(TariffType::OFFICE_TO_OFFICE)
             )
         ]);
@@ -44,17 +54,5 @@ class Leron implements Company
     public function volume(Package $package)
     {
         return 0;
-    }
-
-    private function basePrice(Address $address)
-    {
-        switch ($address->country()->getIsoAlpha2()) {
-            case 'GB':
-                return 200;
-            case 'DE':
-                return 300;
-            case 'ES':
-                return 550;
-        }
     }
 }

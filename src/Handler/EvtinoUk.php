@@ -1,6 +1,6 @@
 <?php
 
-namespace AnyB1s\ShippingCalculator\Company;
+namespace AnyB1s\ShippingCalculator\Handler;
 
 use AnyB1s\ShippingCalculator\Address;
 use AnyB1s\ShippingCalculator\Company;

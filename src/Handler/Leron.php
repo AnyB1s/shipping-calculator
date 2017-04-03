@@ -1,6 +1,6 @@
 <?php
 
-namespace AnyB1s\ShippingCalculator\Company;
+namespace AnyB1s\ShippingCalculator\Handler;
 
 use AnyB1s\ShippingCalculator\Address;
 use AnyB1s\ShippingCalculator\Company;
@@ -11,42 +11,31 @@ use AnyB1s\ShippingCalculator\TariffType;
 use Money\Currency;
 use Money\Money;
 
-class KraychevTransport implements Company
+class Leron implements Company
 {
     public function name(): string
     {
-        return 'Kraychev Transport';
+        return 'Leron';
     }
 
     public function canShipTo(Address $address): bool
     {
-        return in_array($address->country()->getIsoAlpha2(), ['BG', 'DE', 'AT']);
+        return 'BG' === $address->country()->getIsoAlpha2();
     }
 
     public function canShipFrom(Address $address): bool
     {
-        return in_array($address->country()->getIsoAlpha2(), ['BG', 'DE', 'AT']);
+        return in_array($address->country()->getIsoAlpha2(), ['GB', 'DE', 'ES']);
     }
 
     public function tariff(Package $package): PricingCollection
     {
-        $lev = new Currency('BGN');
-        $amount = new Money(0, $lev);
-        $weight = $package->weight()->quantity();
-
-        for ($i = 1; $i <= $weight; $i++) {
-            if ($i < 15) {
-                $amount = $amount->add(new Money(400, $lev));
-                continue;
-            }
-
-            $amount = $amount->add(new Money(300, $lev));
-        }
+        $amount = $this->basePrice($package->senderAddress()) * $package->weight()->quantity();
 
         return new PricingCollection([
             new Tariff(
                 $this,
-                $amount,
+                new Money($amount, new Currency('BGN')),
                 new TariffType(TariffType::OFFICE_TO_OFFICE)
             )
         ]);
@@ -55,5 +44,17 @@ class KraychevTransport implements Company
     public function volume(Package $package)
     {
         return 0;
+    }
+
+    private function basePrice(Address $address)
+    {
+        switch ($address->country()->getIsoAlpha2()) {
+            case 'GB':
+                return 200;
+            case 'DE':
+                return 300;
+            case 'ES':
+                return 550;
+        }
     }
 }
