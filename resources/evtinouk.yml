@@ -1,5 +1,5 @@
-name: БУЛ КРИС НИК – 09
-website: http://bulkris.com
+name: Evtino UK
+website: http://evtino.co.uk
 currency: EUR
 offices:
   - address: ул. В. Левски 7, 6260 Раднево
@@ -13,8 +13,8 @@ offices:
 ships_to:
   BG:
     - Стара Загора
-  DE:
+  GB:
 ships_from:
   DE:
-  BG:
+  GB:
     - Стара Загора

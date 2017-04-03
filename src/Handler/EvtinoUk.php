@@ -11,32 +11,8 @@ use AnyB1s\ShippingCalculator\TariffType;
 use Money\Currency;
 use Money\Money;
 
-class EvtinoUk implements Company
+class EvtinoUk extends Base implements Company
 {
-    /**
-     * @inheritDoc
-     */
-    public function name() : string
-    {
-        return 'Evtino.co.uk';
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function canShipTo(Address $address) : bool
-    {
-        return 'BG' === $address->country()->getIsoAlpha2();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function canShipFrom(Address $address) : bool
-    {
-        return 'GB' === $address->country()->getIsoAlpha2();
-    }
-
     /**
      * @inheritDoc
      */
@@ -44,12 +20,10 @@ class EvtinoUk implements Company
     {
         return new PricingCollection([
             new Tariff(
-                $this,
                 $this->office2office($package),
                 new TariffType(TariffType::OFFICE_TO_OFFICE)
             ),
             new Tariff(
-                $this,
                 $this->office2address($package),
                 new TariffType(TariffType::OFFICE_TO_ADDRESS)
             ),

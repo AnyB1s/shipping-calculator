@@ -11,23 +11,8 @@ use AnyB1s\ShippingCalculator\TariffType;
 use Money\Currency;
 use Money\Money;
 
-class Portokal implements Company
+class Portokal extends Base implements Company
 {
-    public function name(): string
-    {
-        return 'Portokal';
-    }
-
-    public function canShipTo(Address $address): bool
-    {
-        return 'BG' === $address->country()->getIsoAlpha2();
-    }
-
-    public function canShipFrom(Address $address): bool
-    {
-        return 'GB' === $address->country()->getIsoAlpha2();
-    }
-
     public function tariff(Package $package): PricingCollection
     {
         $gbp = new Currency('GBP');
@@ -44,7 +29,6 @@ class Portokal implements Company
 
         return new PricingCollection([
             new Tariff(
-                $this,
                 $baseAmount,
                 new TariffType(TariffType::OFFICE_TO_OFFICE)
             )

@@ -34,4 +34,10 @@ interface Company
      * @return mixed
      */
     public function volume(Package $package);
+
+    /**
+     * @param Package $package
+     * @return array
+     */
+    public function pickupLocationsFor(Package $package);
 }

@@ -5,7 +5,7 @@ use AnyB1s\ShippingCalculator\Tariff;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$from = new \AnyB1s\ShippingCalculator\Address(country('DE'));
+$from = new \AnyB1s\ShippingCalculator\Address(country('GB'));
 $to = new \AnyB1s\ShippingCalculator\Address(country('BG'));
 
 $dimensions = new \AnyB1s\ShippingCalculator\Package\Dimensions(50, 50, 50, 'kg');
@@ -23,9 +23,13 @@ $companies = new Illuminate\Support\Collection([
 
 $calculator = new \AnyB1s\ShippingCalculator\Calculator($package, $companies);
 
-$calculator->compare()->each(function(PricingCollection $pricingCollection) {
-    $pricingCollection->each(function(Tariff $tariff) {
-        echo $tariff->company()->name() . PHP_EOL;
-        echo $tariff->price()->absolute()->getAmount() . PHP_EOL;
+$calculator->compare()->each(function(\AnyB1s\ShippingCalculator\Company $company) use ($package) {
+    echo $company->name() . PHP_EOL;
+    print_r($company->pickupLocationsFor($package));
+    $company->tariff($package)->each(function($tariff) {
+        echo $tariff->price()->getAmount() . PHP_EOL;
     });
+
+    echo '==============================';
+    echo PHP_EOL;
 });

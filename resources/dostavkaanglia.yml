@@ -1,0 +1,26 @@
+name: Dostavka Anglia
+website: http://dostavkaanglia.com
+currency: BGN
+offices:
+  - address: ул. В. Левски 7, 6260 Раднево
+    phones:
+      - +359 879 398 152
+      - +359 879 398 159
+      - +359 879 398 166
+      - +49 157 831 33 318
+    faxes:
+      - +359 417 83 310
+ships_to:
+  BG:
+    - София
+    - Пловдив
+    - Варна
+    - Бургас
+    - Русе
+ships_from:
+  GB:
+    - Лондон
+    - Бристол
+    - Манчестър
+    - Рамсгейт
+    - Ексетер

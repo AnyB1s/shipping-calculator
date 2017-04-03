@@ -15,7 +15,7 @@ use Money\Money;
  * Class DostavkaGermania
  * @package AnyB1s\ShippingCalculator\Company
  */
-class DostavkaGermania implements Company
+class DostavkaGermania extends Base implements Company
 {
     /**
      * @inheritDoc
@@ -54,7 +54,6 @@ class DostavkaGermania implements Company
 
         return new PricingCollection([
             new Tariff(
-                $this,
                 new Money($amount, new Currency('BGN')),
                 new TariffType(TariffType::OFFICE_TO_OFFICE)
             )

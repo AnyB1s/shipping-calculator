@@ -12,31 +12,15 @@ use AnyB1s\ShippingCalculator\TariffType;
 use Money\Currency;
 use Money\Money;
 
-class DostavkaAnglia implements Company
+class DostavkaAnglia extends Base implements Company
 {
-    public function name(): string
-    {
-        return 'Dostavka Anglia';
-    }
-
-    public function canShipTo(Address $address): bool
-    {
-        return 'BG' === $address->country()->getIsoAlpha2();
-    }
-
-    public function canShipFrom(Address $address): bool
-    {
-        return 'GB' === $address->country()->getIsoAlpha2();
-    }
-
     public function tariff(Package $package): PricingCollection
     {
         $amount = $this->multiplierFor($package->weight()) * $package->weight()->quantity();
 
         return new PricingCollection([
             new Tariff(
-                $this,
-                new Money($amount, new Currency('BGN')),
+                new Money($amount, new Currency($this->get('currency'))),
                 new TariffType(TariffType::OFFICE_TO_OFFICE)
             )
         ]);

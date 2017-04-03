@@ -39,7 +39,6 @@ class Bulkris extends Base implements Company
 
         return new PricingCollection([
             new Tariff(
-                $this,
                 new Money($amount, new Currency('EUR')),
                 new TariffType(TariffType::OFFICE_TO_OFFICE)
             )

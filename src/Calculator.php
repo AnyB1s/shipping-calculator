@@ -38,9 +38,6 @@ class Calculator
             })->filter(function (Company $company) {
 
                 return $company->canShipFrom($this->package->senderAddress());
-            })->map(function (Company $company) {
-
-                return $company->tariff($this->package);
             });
     }
 }

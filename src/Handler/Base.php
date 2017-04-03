@@ -3,6 +3,7 @@
 namespace AnyB1s\ShippingCalculator\Handler;
 
 use AnyB1s\ShippingCalculator\Address;
+use AnyB1s\ShippingCalculator\Package;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Yaml\Yaml;
 
@@ -23,7 +24,10 @@ abstract class Base
      */
     public function __construct(array $options = [])
     {
-        $yaml = Yaml::parse(file_get_contents(__DIR__.'/../../resources/'.strtolower(get_class($this)).'.yml'));
+        $reflect = new \ReflectionClass($this);
+        $filename = strtolower($reflect->getShortName());
+
+        $yaml = Yaml::parse(file_get_contents(__DIR__.'/../../resources/'.$filename.'.yml'));
         $resolver = new OptionsResolver();
         $this->configureOptions($resolver);
 
@@ -60,7 +64,7 @@ abstract class Base
      */
     public function canShipTo(Address $address) : bool
     {
-        return in_array($address->country()->getIsoAlpha2(), $this->get('ships_to'));
+        return array_key_exists($address->country()->getIsoAlpha2(), $this->get('ships_to'));
     }
 
     /**
@@ -69,7 +73,16 @@ abstract class Base
      */
     public function canShipFrom(Address $address) : bool
     {
-        return in_array($address->country()->getIsoAlpha2(), $this->get('ships_from'));
+        return array_key_exists($address->country()->getIsoAlpha2(), $this->get('ships_from'));
+    }
+
+    public function pickupLocationsFor(Package $package)
+    {
+        if (! isset($this->options['ships_to'][$package->recipientAddress()->country()->getIsoAlpha2()])) {
+            return [];
+        }
+
+        return $this->options['ships_to'][$package->recipientAddress()->country()->getIsoAlpha2()];
     }
 
     /**

@@ -1,5 +1,5 @@
-name: БУЛ КРИС НИК – 09
-website: http://bulkris.com
+name: Portokal
+website: http://portokal.co.uk
 currency: EUR
 offices:
   - address: ул. В. Левски 7, 6260 Раднево
@@ -13,8 +13,5 @@ offices:
 ships_to:
   BG:
     - Стара Загора
-  DE:
 ships_from:
-  DE:
-  BG:
-    - Стара Загора
+  GB:

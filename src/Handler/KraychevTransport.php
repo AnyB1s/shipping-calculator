@@ -11,23 +11,8 @@ use AnyB1s\ShippingCalculator\TariffType;
 use Money\Currency;
 use Money\Money;
 
-class KraychevTransport implements Company
+class KraychevTransport extends Base implements Company
 {
-    public function name(): string
-    {
-        return 'Kraychev Transport';
-    }
-
-    public function canShipTo(Address $address): bool
-    {
-        return in_array($address->country()->getIsoAlpha2(), ['BG', 'DE', 'AT']);
-    }
-
-    public function canShipFrom(Address $address): bool
-    {
-        return in_array($address->country()->getIsoAlpha2(), ['BG', 'DE', 'AT']);
-    }
-
     public function tariff(Package $package): PricingCollection
     {
         $lev = new Currency('BGN');
@@ -45,7 +30,6 @@ class KraychevTransport implements Company
 
         return new PricingCollection([
             new Tariff(
-                $this,
                 $amount,
                 new TariffType(TariffType::OFFICE_TO_OFFICE)
             )

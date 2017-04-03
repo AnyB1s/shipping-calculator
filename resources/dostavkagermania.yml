@@ -1,5 +1,5 @@
-name: БУЛ КРИС НИК – 09
-website: http://bulkris.com
+name: Dostavka Germania
+website: https://dostavka-germania.com
 currency: EUR
 offices:
   - address: ул. В. Левски 7, 6260 Раднево
@@ -12,9 +12,18 @@ offices:
       - +359 417 83 310
 ships_to:
   BG:
-    - Стара Загора
+    - София
+    - До адрес
   DE:
+    - Мюнхен
+    - Бюцбург
+  AU:
+    - Виена
 ships_from:
-  DE:
   BG:
-    - Стара Загора
+     - София
+  DE:
+    - Мюнхен
+    - Бюцбург
+  AU:
+    - Виена
