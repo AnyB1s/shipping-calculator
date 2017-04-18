@@ -19,6 +19,9 @@
     ],
     "require": {
         "php": "~7.0",
+        "illuminate/database": "5.1.* || 5.2.* || 5.3.* || 5.4.*",
+        "illuminate/config": "5.1.* || 5.2.* || 5.3.* || 5.4.*",
+        "illuminate/events": "5.1.* || 5.2.* || 5.3.* || 5.4.*",
         "moneyphp/money": "^3.0",
         "phpextra/enum": "^1.0",
         "rinvex/country": "^3.1",
